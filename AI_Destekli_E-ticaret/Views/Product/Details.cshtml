@@ -1,0 +1,58 @@
+@model Product
+
+<div class="container py-5">
+    <div class="card shadow border-0 rounded-4 overflow-hidden">
+        <div class="row g-0">
+            <div class="col-md-6 d-flex align-items-center justify-content-center bg-light p-5">
+                <img src="@Model.ResimUrl" class="img-fluid rounded shadow-sm" alt="@Model.Ad" style="max-height: 500px; object-fit: contain;">
+            </div>
+
+            <div class="col-md-6">
+                <div class="card-body p-5 d-flex flex-column h-100 justify-content-center">
+                    
+         
+                    <div class="mb-3">
+                        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold text-uppercase" style="letter-spacing: 1px;">
+                            @Model.Kategori
+                        </span>
+                    </div>
+
+        
+                    <h1 class="display-5 fw-bolder text-dark mb-2">@Model.Ad</h1>
+                    <h2 class="text-success fw-bold mb-4">@Model.Fiyat.ToString("N2") ₺</h2>
+
+
+                    <p class="lead text-secondary mb-4" style="font-size: 1.1rem; line-height: 1.8;">
+                        @Model.Aciklama
+                    </p>
+
+                    <div class="mb-5">
+                        @if (Model.Stok > 10)
+                        {
+                            <span class="badge bg-success px-3 py-2 fs-6 rounded-pill"> Stokta Var (@Model.Stok)</span>
+                        }
+                        else if (Model.Stok > 0)
+                        {
+                            <span class="badge bg-warning text-dark px-3 py-2 fs-6 rounded-pill"> Son @Model.Stok Ürün</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger px-3 py-2 fs-6 rounded-pill"> Tükendi</span>
+                        }
+                    </div>
+
+                    <hr class="mb-4">
+
+                    <div class="d-flex gap-3 mt-auto">
+                        <button class="btn btn-primary btn-lg px-4 py-3 fw-bold flex-grow-1 shadow-sm" @(Model.Stok <= 0 ? "disabled" : "")>
+                            Sepete Ekle
+                        </button>
+                        <a asp-action="GetProduct" class="btn btn-outline-secondary btn-lg px-4 py-3 fw-bold shadow-sm">
+                            Listeye Dön
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
