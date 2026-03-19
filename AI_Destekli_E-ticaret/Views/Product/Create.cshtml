@@ -1,0 +1,47 @@
+@model AI_Destekli_E_ticaret.Models.Product
+
+@{
+    TempData["Title"] = "Ürün Ekle";
+}
+
+<h2>Yeni Ürün Ekle</h2>
+<div class="col-md-12">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label asp-for="Ad" class="form-label">Ürün Adı</label>
+            <input asp-for="Ad" class="form-control" />
+            <span asp-validation-for="Ad" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Aciklama" class="form-label">Ürün Açıklaması</label>
+            <textarea class="form-control" maxlength="500" rows="3" cols="5"></textarea>
+            <span asp-validation-for="Aciklama" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Fiyat" class="form-label">Fiyat</label>
+            <input asp-for="Fiyat" class="form-control" />
+            <span asp-validation-for="Fiyat" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Stok" class="form-label">Stok Adedi</label>
+            <input asp-for="Stok" type="number" min="0" class="form-control" />
+            <span asp-validation-for="Stok" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Kategori" class="form-label">Kategori</label>
+            <input asp-for="Kategori" class="form-control" />
+            <span asp-validation-for="Kategori" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ürün Resmi</label>
+            <input type="file" name="imageFile" class="form-control" accept="image/*" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Ürünü Kaydet</button>
+    </form>
+</div>

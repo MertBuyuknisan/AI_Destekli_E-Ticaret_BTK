@@ -21,6 +21,13 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     }).AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.Cookie.Name = "EticaretCookie";
+});
+
 
 var app = builder.Build();
 

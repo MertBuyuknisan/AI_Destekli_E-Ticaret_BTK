@@ -1,8 +1,123 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Ana Sayfa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Slider Alanı -->
+<div class="container-fluid px-0 mb-5">
+    <div id="carouselExampleIndicators" class="carousel slide shadow" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner" style="max-height: 550px;">
+            <div class="carousel-item active">
+                <img src="/images/carousel_1.jpg" class="d-block w-100" alt="Kampanya 1"
+                     style="object-fit: cover; height: 550px; filter: brightness(0.8);">
+                <div class="carousel-caption d-none d-md-block"
+                     style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 20px;">
+                    <h2 class="fw-bold">Yüzlerce Ürünle Yanınızdayız</h2>
+                    <p class="fs-5">En uygun fiyatlarla kaliteli ürünlere hemen ulaşın.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/carousel_2.jpg" class="d-block w-100" alt="Kampanya 2"
+                     style="object-fit: cover; height: 550px; filter: brightness(0.8);">
+                <div class="carousel-caption d-none d-md-block"
+                     style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 20px;">
+                    <h2 class="fw-bold">Yeni Sezon Ürünleri</h2>
+                    <p class="fs-5">Trendi yakalayın, yeni koleksiyonumuzu keşfedin.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/carousel_3.jpg" class="d-block w-100" alt="Kampanya 3"
+                     style="object-fit: cover; height: 550px; filter: brightness(0.8);">
+                <div class="carousel-caption d-none d-md-block"
+                     style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 20px;">
+                    <h2 class="fw-bold">Teknolojide İndirim</h2>
+                    <p class="fs-5">Elektronik aletlerde haftanın fırsatlarını kaçırmayın.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/carousel_4.jpg" class="d-block w-100" alt="Kampanya 4"
+                     style="object-fit: cover; height: 550px; filter: brightness(0.8);">
+                <div class="carousel-caption d-none d-md-block"
+                     style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 20px;">
+                    <h2 class="fw-bold">Hızlı Teslimat</h2>
+                    <p class="fs-5">Sipariş verin, ertesi gün kapınızda olsun!</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+            <span class="visually-hidden">Önceki</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+            <span class="visually-hidden">Sonraki</span>
+        </button>
+    </div>
 </div>
+
+<!-- Hoş Geldin Alanı -->
+<div class="container text-center mb-5 mt-5">
+    <h1 class="display-5 fw-bold text-dark mb-3">E-Ticaret Dünyasına Hoş Geldiniz</h1>
+    <p class="lead text-secondary mx-auto" style="max-width: 700px;">
+        Aradığınız her şey tek tık uzağınızda. Sizlere en iyi performansı ve alışveriş deneyimini sunmak için buradayız.
+    </p>
+    <a asp-controller="Product" asp-action="GetProduct" class="btn btn-primary btn-lg mt-4 px-5 py-3 shadow-sm"
+           style="border-radius: 30px; font-weight: 500;">
+        Hemen Alışverişe Başla <i class="bi bi-arrow-right ms-2"></i>
+    </a>
+</div>
+
+<!-- Özellikler (Features) Alanı -->
+<div class="container mb-5 pb-5">
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4 hover-lift" style="transition: transform 0.3s ease;">
+                <div class="card-body">
+                    <div class="display-3 text-primary mb-3">📦</div>
+                    <h4 class="card-title fw-bold">Geniş Ürün Yelpazesi</h4>
+                    <p class="card-text text-muted mt-3">Farklı kategorilerdeki yüzlerce ürünü hemen keşfedin ve güvenle
+                        sipariş verin.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 hover-lift" style="transition: transform 0.3s ease;">
+                    <div class="card-body">
+                        <div class="display-3 text-success mb-3">🛡️</div>
+                        <h4 class="card-title fw-bold">%100 Güvenli Alt Yapı</h4>
+                        <p class="card-text text-muted mt-3">Bilgileriniz özel şifreleme yöntemleriyle korunur. Güvenle
+                            alışveriş yapabilirsiniz.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift" style="transition: transform 0.3s ease;">
+                        <div class="card-body">
+                            <div class="display-3 text-warning mb-3">🚚</div>
+                            <h4 class="card-title fw-bold">Jet Hızında Teslimat</h4>
+                            <p class="card-text text-muted mt-3">Siparişlerinizi aynı gün kargoya teslim ediyor, bekletmeden
+                                size ulaştırıyoruz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sayfa altına hover efekti için ufak bir stil eklentisi -->
+            <style>
+                .hover-lift:hover {
+                    transform: translateY(-10px) !important;
+                    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+                }
+            </style>

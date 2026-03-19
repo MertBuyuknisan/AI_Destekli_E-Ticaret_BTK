@@ -1,50 +1,143 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using AI_Destekli_E_ticaret.Models
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AI_Destekli_E_ticaret</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- İkonlar için Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AI_Destekli_E_ticaret.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AI_Destekli_E_ticaret</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">AI MAĞAZAM</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+                        <ul class="navbar-nav ms-auto">
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-success text-light " asp-controller="Product"
+                                       asp-action="GetProduct">Ürünleri Listele</a>
+                                </li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-success" asp-controller="Product" asp-action="Create">Yeni ürün
+                                            ekle</a>
+                                        </li>
+                                    }
+                                    <li class="nav-item">
+                                        <span class="nav-link text-white">Merhaba, @User.Identity?.Name</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-danger" asp-controller="Account" asp-action="LogOut">Çıkış
+                                            Yap</a>
+                                        </li>
+                                    }
+                            else
+                                    {
+                                        <ul class="navbar-nav flex-auto">
+                                            <li class="nav-item">
+                                                <a class="nav-link text-dark text-white" asp-area="" asp-controller="Account"
+                                                   asp-action="Login">Giriş Yap</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link text-white" asp-area="" asp-controller="Account"
+                                                   asp-action="Register">Kayıt Ol</a>
+                                            </li>
+                                        </ul>
+                                    }
+                                </ul>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - AI_Destekli_E_ticaret - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="container pb-5">
+                <main role="main" class="pb-3 mb-5">
+                    @RenderBody()
+                </main>
+            </div>
+
+
+            <footer class="bg-dark pt-5 pb-3 mt-auto">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <h5 class="text-uppercase fw-bold mb-3 text-info">AI E-Ticaret</h5>
+                            <p class="text-light" style="font-size: 0.95rem; opacity: 0.9;">
+                                Müşterilerimize yapay zeka destekli alışveriş deneyimiyle en kaliteli ürünleri, en uygun
+                                fiyatlarla ve güvenilir bir altyapıda sunuyoruz.
+                            </p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h5 class="text-uppercase fw-bold mb-3 text-light">Hızlı Bağlantılar</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a asp-controller="Home" asp-action="Index"
+                                                        class="text-light text-decoration-none hover-white" style="opacity: 0.8;">Ana Sayfa</a></li>
+                                    <li class="mb-2"><a asp-controller="Product" asp-action="GetProduct"
+                                                            class="text-light text-decoration-none hover-white" style="opacity: 0.8;">Ürünlerimiz</a></li>
+                                        <li class="mb-2"><a asp-controller="Account" asp-action="Register"
+                                                                class="text-light text-decoration-none hover-white" style="opacity: 0.8;">Kayıt Ol</a></li>
+                                            <li class="mb-2"><a asp-controller="Home" asp-action="Privacy"
+                                                                    class="text-light text-decoration-none hover-white" style="opacity: 0.8;">Gizlilik Politikası</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <h5 class="text-uppercase fw-bold mb-3 text-light">İletişim</h5>
+                                            <ul class="list-unstyled text-light" style="font-size: 0.95rem; opacity: 0.8;">
+                                                <li class="mb-2"><i class="bi bi-geo-alt-fill text-info me-2"></i> Adana,
+                                                    Türkiye</li>
+                                                    <li class="mb-2"><i class="bi bi-envelope-fill text-info me-2"></i> info@aieticaret.com</li>
+                                                    <li class="mb-2"><i class="bi bi-telephone-fill text-info me-2"></i> +90 850 555 55 55</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-4" style="border-top: 1px solid rgba(255,255,255,0.2);">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 text-light" style="opacity: 0.8;">
+                                                <p class="mb-0">&copy; 2026 <strong class="text-white">AI Destekli E-Ticaret</strong>. Tüm Hakları Saklıdır.</p>
+                                            </div>
+                                            <div class="col-md-6 text-center text-md-end">
+                                                <a href="#" class="text-light me-3 fs-5 hover-white" style="opacity: 0.8;"><i class="bi bi-facebook"></i></a>
+                                                <a href="#" class="text-light me-3 fs-5 hover-white" style="opacity: 0.8;"><i class="bi bi-twitter-x"></i></a>
+                                                <a href="#" class="text-light me-3 fs-5 hover-white" style="opacity: 0.8;"><i class="bi bi-instagram"></i></a>
+                                                <a href="#" class="text-light fs-5 hover-white" style="opacity: 0.8;"><i class="bi bi-linkedin"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </footer>
+
+                                <style>
+                                                .hover-white:hover {
+                                                    opacity: 1 !important;
+                                                    color: #fff !important;
+                                                    text-decoration: underline !important;
+                                                }
+                                </style>
+                                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                                <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                                <script src="~/js/site.js" asp-append-version="true"></script>
+                                @await RenderSectionAsync("Scripts", required: false)
+                            </body>
+
+                        </html>

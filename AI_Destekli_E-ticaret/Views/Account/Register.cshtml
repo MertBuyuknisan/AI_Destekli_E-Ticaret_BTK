@@ -1,0 +1,48 @@
+@using AI_Destekli_E_ticaret.Models.ViewModels
+@model RegisterViewModel
+
+
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="row d-flex justify-content-center mb-4">
+
+    <div class="col-md-4">
+        <h2>Kayıt Ol</h2>
+        <hr />
+        <form asp-action="Register" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label">Ad Soyad</label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Şifre</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label">Şifre Tekrar</label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success rounded-5 w-100">Kayıt Ol</button>
+            </div>
+        </form>
+        <a asp-controller="Account" asp-action="Login"
+           class="text-decoration-none btn btn-opacity rounded-5 w-100 border-primary">Zaten bir hesabım var</a>
+    </div>
+
+</div>

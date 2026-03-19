@@ -1,0 +1,55 @@
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Product>
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<div class="container">
+    <h2 class="my-4">Ürünlerimiz</h2>
+    <div class="row">
+        @if (!Model.Any())
+        {
+            <div class="col-12 mt-4 text-center">
+                <div class="alert alert-danger shadow-sm" role="alert">
+                    <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i> Şu anda gösterilecek herhangi bir ürün
+                        bulunmuyor.</h5>
+                    </div>
+                </div>
+            }
+
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <img src="@item.ResimUrl" class="card-img-top" alt="@item.Ad"
+                             style="height: 250px; width: 100%; object-fit: contain; padding: 0.5rem;">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="card-title">@item.Ad</h5>
+                            <p class="card-text text-primary fw-bold">@item.Fiyat TL</p>
+                            <p class="text-muted small mb-auto">Stok: @item.Stok</p>
+                            <div class="mt-3">
+                                @if (User.IsInRole("Admin") && (SignInManager.IsSignedIn(User)))
+                                {
+                                    <a asp-action="Details" asp-route-id="@item.Id"
+                                       class="btn btn-outline-dark btn-sm mb-1 w-25">Detay</a>
+
+                                    <a asp-action="Details" asp-route-id="@item.Id"
+                                       class="btn btn-outline-dark btn-sm mb-1 w-30">Güncelle</a>
+
+                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id"
+                                       class="btn btn-outline-dark btn-sm mb-1 w-25">Sil</a>
+                                }
+                                @if (!User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Details" asp-route-id="@item.Id"
+                                       class="btn btn-outline-dark btn-sm mb-1 w-100">Detay</a>
+
+                                }
+                                <button class="btn btn-primary btn-sm w-100">Sepete Ekle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

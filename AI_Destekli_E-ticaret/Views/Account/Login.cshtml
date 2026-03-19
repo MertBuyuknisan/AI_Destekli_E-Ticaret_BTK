@@ -1,0 +1,43 @@
+@using AI_Destekli_E_ticaret.Models.ViewModels
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="row d-flex justify-content-center mb-4">
+
+    <div class="col-md-4">
+        <h2>Giriş Yap</h2>
+        <hr />
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Şifre</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input asp-for="RememberMe" class="form-check-input" />
+                <label asp-for="RememberMe" class="form-check-label">Beni Hatırla</label>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" asp-action="Login" asp-controller="Account"
+                        class="btn btn-success rounded-5 w-100">Giriş Yap</button>
+            </div>
+        </form>
+
+        <a class="text-decoration-none btn btn-opacity rounded-5 w-100 border-primary" asp-controller="Account"
+           asp-action="Register">Yeni hesap oluştur</a>
+    </div>
+
+</div>
