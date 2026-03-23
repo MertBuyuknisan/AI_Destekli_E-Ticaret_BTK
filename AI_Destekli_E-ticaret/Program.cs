@@ -1,5 +1,6 @@
 
 using AI_Destekli_E_ticaret.Models;
+using AI_Destekli_E_ticaret.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var geminiSettings = new GeminiSettings
+{
+    BaseUrl = "https://generativelanguage.googleapis.com/v1beta/models/",
+    Model = "gemini-2.5-flash",
+    ApiKey = builder.Configuration["GeminiApi:ApiKey"] ?? throw new Exception("Gemini API Key bulunamadı!")
+};
+
+builder.Services.AddSingleton(geminiSettings);
+
+builder.Services.AddHttpClient<GeminiChatService>();
+
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 

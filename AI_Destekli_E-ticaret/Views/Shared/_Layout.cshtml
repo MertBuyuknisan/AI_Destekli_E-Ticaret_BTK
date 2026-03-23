@@ -35,6 +35,11 @@
                                     <a class="nav-link text-success text-light " asp-controller="Product"
                                        asp-action="GetProduct">Ürünleri Listele</a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Chat" asp-action="Index">Yapay Zeka Asistanı</a>
+                                </li>
+
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li class="nav-item">
