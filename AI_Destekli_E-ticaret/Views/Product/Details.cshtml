@@ -44,9 +44,12 @@
                     <hr class="mb-4">
 
                     <div class="d-flex gap-3 mt-auto">
-                        <button class="btn btn-primary btn-lg px-4 py-3 fw-bold flex-grow-1 shadow-sm" @(Model.Stok <= 0 ? "disabled" : "")>
-                            Sepete Ekle
+                       <form asp-controller="Cart" asp-action="AddToCart" method="post" class="flex-grow-1"> 
+                        <input type="hidden" name="productId" value="@Model.Id"/>
+                        <button type="submit" class="btn btn-primary btn-lg px-4 py-3 fw-bold w-100 shadow-sm" @(Model.Stok <= 0 ? "disabled" : "")>
+                                Sepete Ekle
                         </button>
+                       </form>
                         <a asp-action="GetProduct" class="btn btn-outline-secondary btn-lg px-4 py-3 fw-bold shadow-sm">
                             Listeye Dön
                         </a>
